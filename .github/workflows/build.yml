@@ -32,6 +32,14 @@ jobs:
           pip install --upgrade pip
           pip install "cython<3.0.0" "buildozer==1.5.0"
 
+      - name: Pre-install Android SDK Build-Tools & AIDL
+        run: |
+          SDK_DIR="$HOME/.buildozer/android/platform/android-sdk"
+          mkdir -p "$SDK_DIR/build-tools"
+          
+          # Copiem build-tools preinstalate din mediul GitHub Actions (conține aidl)
+          cp -r $ANDROID_HOME/build-tools/* "$SDK_DIR/build-tools/"
+
       - name: Build APK with Buildozer
         run: |
           buildozer -v android debug
