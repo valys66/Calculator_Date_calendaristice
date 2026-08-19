@@ -9,9 +9,10 @@ requirements = python3,kivy
 orientation = portrait
 fullscreen = 0
 
-android.archs = arm64-v8a
-android.api = 33
+# Configurare SDK / NDK stabilă
+android.api = 31
 android.minapi = 24
+android.sdk = 20
 android.ndk = 25b
 android.accept_sdk_licenses = True
 
