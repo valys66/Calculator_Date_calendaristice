@@ -32,19 +32,15 @@ jobs:
           pip install --upgrade pip
           pip install "cython<3.0.0" "buildozer==1.5.0"
 
-      - name: Setup Android SDK Components & Sdkmanager Wrapper
+      - name: Setup Android SDK Components
         run: |
           SDK_DIR="$HOME/.buildozer/android/platform/android-sdk"
           mkdir -p "$SDK_DIR/tools/bin"
           
-          # Copiem build-tools pentru rezolvarea AIDL
           mkdir -p "$SDK_DIR/build-tools"
           cp -r $ANDROID_HOME/build-tools/* "$SDK_DIR/build-tools/"
-          
-          # Copiem cmdline-tools pentru sdkmanager
           cp -r $ANDROID_HOME/cmdline-tools "$SDK_DIR/"
 
-          # Creăm scriptul wrapper compatibil pentru tools/bin/sdkmanager
           cat << 'EOF' > "$SDK_DIR/tools/bin/sdkmanager"
 #!/bin/bash
 exec $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$@"
